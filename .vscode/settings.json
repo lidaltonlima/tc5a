@@ -1,0 +1,83 @@
+{
+  // ==============================================================================================
+  // General
+  // ==============================================================================================
+  // Editor ***************************************************************************************
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+
+  // Fonts ****************************************************************************************
+  "editor.fontSize": 18,
+  "debug.console.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+
+  // Interface ************************************************************************************
+  "workbench.colorTheme": "OM Theme (Default Dracula Italic)",
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.compactFolders": false,
+
+  // ==============================================================================================
+  // Languages and files types
+  // ==============================================================================================
+  // Fortran **************************************************************************************
+  "fortran.linter.compiler": "gfortran",
+  "fortran.linter.includePaths": [
+    "${workspaceFolder}/build/**",
+    "${workspaceFolder}/src/**"
+  ],
+  "[FortranFreeForm]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 4
+  },
+  "fortran.formatting.formatter": "findent",
+  "fortran.formatting.findentArgs": [
+    "--indent=4",
+    "--indent_select=8",
+    "--indent_case=4",
+    "--line-length=100"
+  ],
+
+  // Python ***************************************************************************************
+  "python.analysis.typeCheckingMode": "off",
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+
+  // Json *****************************************************************************************
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ==============================================================================================
+  // Extensions
+  // ==============================================================================================
+  // Code Runner **********************************************************************************
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.ignoreSelection": true,
+  "code-runner.fileDirectoryAsCwd": false,
+  "code-runner.cwd": "$workspaceRoot",
+  "code-runner.executorMap": {
+    "FortranFreeForm": "clear ; cd $dir && fpm run"
+  },
+
+  // Code Spell Checker ***************************************************************************
+  "cSpell.language": "en, pt-BR",
+
+  // Copilot **************************************************************************************
+  "github.copilot.enable": {
+    "*": true,
+    "FortranFreeForm": false
+  },
+  // Material Icon Theme **************************************************************************
+  "material-icon-theme.folders.associations": {
+    "analysis": "core",
+    "objects": "delta",
+    "fetch": "download",
+    "engineer": "nuxt",
+    "reactions": "vercel",
+    "pyengineer": "nuxt",
+    "structures": "graphql",
+    "dynamic": "generator",
+    "linear": "serverless"
+  },
+  "cSpell.words": ["Ftool"]
+}
