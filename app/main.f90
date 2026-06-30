@@ -1,6 +1,5 @@
 program main
-  use tc5a, only: say_hello
-  implicit none
+    use file_to_structure, only: get_structure_data
 
-  call say_hello()
+    call get_structure_data()
 end program main

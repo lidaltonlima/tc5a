@@ -1,0 +1,11 @@
+MATERIALS
+E                   rho
+
+SECTIONS
+Area                Iz
+
+NODES
+id                  x                   y
+
+BARS
+id          Start_Node                  End_Node
