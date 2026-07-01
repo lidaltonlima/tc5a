@@ -311,6 +311,11 @@ Se necessário, abra o arquivo `.git/hooks/commit-msg` em um editor de texto e p
       <td>🗃️ <code>:card_file_box:</code></td>
       <td><code>raw</code></td>
     </tr>
+    <tr>
+      <td>Dados</td>
+      <td>💾 <code>:floppy_disk:</code></td>
+      <td><code>add</code></td>
+    </tr>
   </tbody>
 </table>
 

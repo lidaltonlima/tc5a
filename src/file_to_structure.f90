@@ -36,11 +36,24 @@ contains
         end if
     end subroutine open_data_file
 
-    subroutine get_structure_data()
+    subroutine get_structure_data(nno, nel, ndofn, nmat, nsec, &
+        materials, sections, nodes, bars, debug)
         ! PURPOSE: Get da data structure from file structure.dat
 
         ! I/O vars
-        logical :: debug = .true.  ! If the debug output will be show
+        integer, intent(out) :: nno  ! Number of nodes
+        integer, intent(out) :: nel  ! Number of elements
+        integer, intent(out) :: ndofn  ! Number of degrees of freedom per node
+        integer, intent(out) :: nmat  ! Number of materials
+        integer, intent(out) :: nsec  ! Number of sections
+
+        real(8), intent(out), allocatable :: materials(:, :)
+        real(8), intent(out), allocatable :: sections(:, :)
+        real(8), intent(out), allocatable :: nodes(:, :)
+        integer, intent(out), allocatable :: bars(:, :)
+
+
+        logical, optional, intent(in) :: debug  ! If the debug output will be show
 
         ! File vars
         character(7), parameter :: data_folder = './data/'  ! Data file location
@@ -50,25 +63,23 @@ contains
         ! Read vars
         integer :: read_stat  ! State of current read
 
-        ! Data vars
-        integer :: nno  ! Number of nodes
-        integer :: nel  ! Number of elements
-        integer :: ndofn  ! Number of degrees of freedom per node
-        integer :: nmat  ! Number of materials
-        integer :: nsec  ! Number of sections
-
-        real(8), allocatable :: materials(:, :)
-        real(8), allocatable :: sections(:, :)
-        real(8), allocatable :: nodes(:, :)
-        integer, allocatable :: bars(:, :)
-
         ! Control vars
         integer :: i
         integer :: id  ! Object ID
         character(20) :: line_label
+        logical :: is_debug
 
         ! Temp vars
         integer :: temp_int
+
+
+        ! Control the view of debug
+        if (present(debug)) then
+            is_debug = debug
+        else
+            is_debug = .false.
+        end if
+
 
         ! =========================================================================================
         ! CONTROLS
@@ -176,7 +187,7 @@ contains
         ! Debug
         ! =========================================================================================
 100     format(1A5, ':', 1I20)
-        if ( debug ) then
+        if ( is_debug ) then
             ! Title *******************************************************************************
             do i = 1, 100
                 write(*, '(A)', advance='no') '='
