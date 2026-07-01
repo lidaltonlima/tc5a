@@ -193,7 +193,7 @@ contains
             write(*, '(A9)', advance='no') 'CONTROLS '
 
             do i = 1, 91
-                write(*, '(A1)', advance='no') '*'
+                write(*, '(A1)', advance='no') '/'
             end do
             print *
 
@@ -203,23 +203,25 @@ contains
             write(*, 100) 'ndofn', ndofn
             write(*, 100) 'nmat', nmat
             write(*, 100) 'nsec', nsec
-            write(*, *)
+            print *
+            print *
 
             ! Materials ***************************************************************************
             write(*, '(A9)', advance='no') 'MATERIALS '
 
             do i = 1, 91
-                write(*, '(A1)', advance='no') '*'
+                write(*, '(A1)', advance='no') '/'
             end do
             print *
             call show_table(materials, 100, precision=5, titles=[character(len=3) :: 'E', 'rho'])
+            print *
             print *
 
             ! SECTIONS ****************************************************************************
             write(*, '(A9)', advance='no') 'SECTIONS '
 
             do i = 1, 91
-                write(*, '(A1)', advance='no') '*'
+                write(*, '(A1)', advance='no') '/'
             end do
             print *
             call show_table(sections, &
@@ -227,12 +229,13 @@ contains
                 precision=5, &
                 titles=[character(len=7) :: 'Area', 'Inertia'])
             print *
+            print *
 
             ! NODES *******************************************************************************
             write(*, '(A9)', advance='no') 'NODES '
 
             do i = 1, 91
-                write(*, '(A1)', advance='no') '*'
+                write(*, '(A1)', advance='no') '/'
             end do
             print *
             call show_table(nodes, &
@@ -240,12 +243,13 @@ contains
                 precision=2, &
                 titles=[character(len=7) :: 'x', 'y'])
             print *
+            print *
 
             ! Bars ********************************************************************************
             write(*, '(A9)', advance='no') 'BARS '
 
             do i = 1, 91
-                write(*, '(A1)', advance='no') '*'
+                write(*, '(A1)', advance='no') '/'
             end do
             print *
             call show_table(bars, &

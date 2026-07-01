@@ -104,9 +104,9 @@ contains
         if (nCol /= size(titles)) error stop 'Size not equals (titles /= nCol)'
 
         if (present(precision)) then
-            write(fmt_real, "('(F', I0, '.', I0, ')')") (column_size - 1), precision
+            write(fmt_real, "('(ES', I0, '.', I0, ')')") (column_size - 1), precision
         else
-            write(fmt_real, "('(F', I0, '.4', ')')") (column_size - 1)
+            write(fmt_real, "('(ES', I0, '.4', ')')") (column_size - 1)
         end if
         write(fmt_char, "('(A', I0, ')')") (column_size - 1)
 

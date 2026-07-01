@@ -61,15 +61,17 @@
 
   // Code Spell Checker ***************************************************************************
   "cSpell.language": "en, pt-BR",
+  "cSpell.words": ["ndofn", "nmat", "nsec"],
 
   // Copilot **************************************************************************************
   "github.copilot.enable": {
     "*": true,
     "FortranFreeForm": false
   },
+  "chat.fontSize": 16,
+
   // Material Icon Theme **************************************************************************
   "material-icon-theme.folders.associations": {
-    "pyengineer": "nuxt"
-  },
-  "cSpell.words": ["ndofn", "nmat", "nsec"]
+    "engineer": "nuxt"
+  }
 }
