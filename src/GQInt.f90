@@ -9,10 +9,11 @@ module GQInt
 contains
     pure function intGQ(a, b, f, n) result(int)
         ! Calculate the integral using Gauss Quadrature
-        implicit none
 
-        ! Statement ===================================================================================
-        ! In-out variables
+        ! =========================================================================================
+        ! Vars statement
+        ! =========================================================================================
+        ! I/O
         integer, intent(in) :: n ! Number of points
         real(8), intent(in) :: a ! Lower limit
         real(8), intent(in) :: b ! Upper limit
@@ -23,7 +24,9 @@ contains
         ! Internal variables
         integer :: i ! Index
 
+        ! =========================================================================================
         ! Function interfaces
+        ! =========================================================================================
         interface
             pure function f(x) result(y)
                 ! Function for integration
@@ -32,11 +35,15 @@ contains
             end function f
         end interface
 
-        ! Allocation ==================================================================================
-        ! Allocate arrays
+        ! =========================================================================================
+        ! Allocation
+        ! =========================================================================================
         allocate(t(n))
         allocate(c(n))
 
+        ! =========================================================================================
+        ! Calculation
+        ! =========================================================================================
         ! Get roots and coefficients from table
         call getTC(n, t, c)
 
@@ -49,13 +56,17 @@ contains
 
     pure real(8) function new_x(a, b, t) result(x)
         ! Calculate the new value of x for new limits of integration
-        implicit none
 
-        ! Statement ===================================================================================
-        ! In-out variables
+        ! =========================================================================================
+        ! Vars statement
+        ! =========================================================================================
+        ! I/O
         real(8), intent(in) :: a, b ! Limits of integration
         real(8), intent(in) :: t ! Value to transformation
 
+        ! =========================================================================================
+        ! Calculation
+        ! =========================================================================================
         x = ((b - a) * t + (b + a)) / 2
     end function new_x
 end module GQInt

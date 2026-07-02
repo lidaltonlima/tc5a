@@ -1,14 +1,17 @@
-module stiffness
+module Stiffness
     implicit none
     private
 
     public :: get_kl
 contains
-    subroutine get_kl(kl, nel, ndofn, materials, sections, nodes, bars)
+    pure function get_kl(nel, ndofn, materials, sections, nodes, bars) result(kl)
         ! Calculate the stiffness matrix local for all elements
 
+        ! =========================================================================================
+        ! Vars statement
+        ! =========================================================================================
         ! I/O
-        real(8), allocatable, intent(out):: kl(:, :, :) ! Stiffness matrix kl(i, j, element_id)
+        real(8), allocatable:: kl(:, :, :) ! Stiffness matrix kl(i, j, element_id)
         integer, intent(in) :: nel  ! Number of elements
         integer, intent(in) :: ndofn  ! Number of degrees of freedom per node
         real(8), intent(in) :: materials(:, :)
@@ -30,7 +33,7 @@ contains
         kl_dim = 2 * ndofn  ! 2 nodes per element
 
         ! =========================================================================================
-        ! Calc
+        ! Calculation
         ! =========================================================================================
         allocate(kl(nel, kl_dim, kl_dim))
 
@@ -76,8 +79,6 @@ contains
             kl(id, 6, 3)= kl(id, 3, 6)
             kl(id, 6, 5)= kl(id, 3, 5)
             kl(id, 6, 6)= kl(id, 3, 3)
-
         end do
-
-    end subroutine get_kl
-end module stiffness
+    end function get_kl
+end module Stiffness

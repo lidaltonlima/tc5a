@@ -1,4 +1,4 @@
-module dead_weight
+module DeadWeight
     use Lagrange, only: LagPol
     use GQInt, only: intGQ
     implicit none
@@ -21,7 +21,7 @@ contains
         real(8), intent(in) :: px(:)  ! x points where the area is calculated
         real(8), optional, intent(in) :: gravity  ! Acceleration of gravity
 
-        ! Calc
+        ! Calculation
         real(8) :: weight  ! Total weight of element
         real(8) :: length  ! Length of element
         real(8) :: element_dir(2)  ! Unit vector to gravity direction
@@ -30,7 +30,6 @@ contains
         real(8) :: force_nor(2)
         real(8) :: force_per(2)
 
-        ! Auxiliary
         ! =========================================================================================
         ! Vars initialization
         ! =========================================================================================
@@ -66,4 +65,4 @@ contains
 
         y = LagPol(g_px, g_areas, x) * g_rho * g_gravity
     end function q
-end module dead_weight
+end module DeadWeight

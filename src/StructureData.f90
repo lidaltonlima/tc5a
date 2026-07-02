@@ -1,5 +1,5 @@
-module file_to_structure
-    use table, only: show_table
+module StructureData
+    use OutputTerminal, only: print_table
     implicit none
 
     private
@@ -224,7 +224,11 @@ contains
                 write(*, '(A1)', advance='no') '/'
             end do
             print *
-            call show_table(materials, 100, precision=5, titles=[character(len=3) :: 'E', 'rho'])
+            call print_table(materials, &
+                100, &
+                precision=5, &
+                titles=[character(len=3) :: 'E', 'rho'], &
+                line_number=.true.)
             print *
             print *
 
@@ -235,10 +239,11 @@ contains
                 write(*, '(A1)', advance='no') '/'
             end do
             print *
-            call show_table(sections, &
+            call print_table(sections, &
                 100, &
                 precision=5, &
-                titles=[character(len=7) :: 'Area', 'Inertia'])
+                titles=[character(len=7) :: 'Area', 'Inertia'], &
+                line_number=.true.)
             print *
             print *
 
@@ -249,10 +254,11 @@ contains
                 write(*, '(A1)', advance='no') '/'
             end do
             print *
-            call show_table(nodes, &
+            call print_table(nodes, &
                 100, &
                 precision=2, &
-                titles=[character(len=7) :: 'x', 'y'])
+                titles=[character(len=7) :: 'x', 'y'], &
+                line_number=.true.)
             print *
             print *
 
@@ -263,10 +269,11 @@ contains
                 write(*, '(A1)', advance='no') '/'
             end do
             print *
-            call show_table(bars, &
+            call print_table(bars, &
                 100, &
-                titles=[character(len=10) :: 'Material', 'Section', 'Start Node', 'End Node'])
+                titles=[character(len=10) :: 'Material', 'Section', 'Start Node', 'End Node'], &
+                line_number=.true.)
             print *
         end if
     end subroutine get_structure_data
-end module file_to_structure
+end module StructureData

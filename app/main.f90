@@ -1,9 +1,12 @@
 program main
-    use file_to_structure, only: get_structure_data
-    use stiffness, only: get_kl
-    use dead_weight, only: get_dead_weight
+    use StructureData, only: get_structure_data
+    use Stiffness, only: get_kl
+    use DeadWeight, only: get_dead_weight
     implicit none
 
+    ! =============================================================================================
+    ! Vars statement
+    ! =============================================================================================
     ! Structure data
     integer :: nno  ! Number of nodes
     integer :: nel  ! Number of elements
@@ -25,13 +28,12 @@ program main
     logical, parameter :: debug = .false.
 
     ! =============================================================================================
-    ! Calc
+    ! Calculation
     ! =============================================================================================
     call get_structure_data(nno, nel, ndofn, nmat, nsec, &
-        materials, sections, nodes, bars)
+        materials, sections, nodes, bars,debug=.true.)
 
-    call get_kl(kl, nel, ndofn, &
-        materials, sections, nodes, bars)
+    kl = get_kl(nel, ndofn, materials, sections, nodes, bars)
 
     call get_dead_weight(rho=7850d0, dx=5d0, dy=0d0, px=[0d0, 2.5d0, 5d0], areas=[0.05d0, 0.0825d0, 0.12d0])
 

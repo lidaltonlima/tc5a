@@ -5,17 +5,22 @@ module Lagrange
     public LagPol
 contains
     pure function LagPol(px, py, x) result(y)
-        ! In-Out vars
+        ! =========================================================================================
+        ! Vars statement
+        ! =========================================================================================
+        ! I/O
         real(8), intent(in) :: px(:), py(:) ! Points for interpolation
         real(8), intent(in) :: x ! Point for calculate
         real(8) :: y
 
-        ! Internal vars
+        ! Auxiliary
         integer :: n ! Number of points
         integer :: i, j ! Indexes
         real(8) :: L ! Lagrangian Polynomial
 
-        ! Start vars
+        ! =========================================================================================
+        ! Vars initialization
+        ! =========================================================================================
         y = 0
         L = 1
 
@@ -25,6 +30,9 @@ contains
             error stop 'size of x points not equals size y points'
         end if
 
+        ! =========================================================================================
+        ! Calculation
+        ! =========================================================================================
         ! Sun
         do i = 1, n
             ! Prod
