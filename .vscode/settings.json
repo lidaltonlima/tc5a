@@ -59,6 +59,9 @@
     "FortranFreeForm": "clear ; cd $dir && fpm run"
   },
 
+  // Git ******************************************************************************************
+  "git.confirmSync": false,
+
   // Code Spell Checker ***************************************************************************
   "cSpell.language": "en, pt-BR",
   "cSpell.words": ["ndofn", "nmat", "nsec"],

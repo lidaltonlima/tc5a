@@ -33,7 +33,7 @@ program main
     call get_kl(kl, nel, ndofn, &
         materials, sections, nodes, bars)
 
-    call get_dead_weight(rho=7850d0, dx=5d0, dy=5d0, px=[0d0, 2.5d0, 5d0], areas=[0.05d0, 0.0825d0, 0.12d0])
+    call get_dead_weight(rho=7850d0, dx=5d0, dy=0d0, px=[0d0, 2.5d0, 5d0], areas=[0.05d0, 0.0825d0, 0.12d0])
 
     ! =============================================================================================
     ! Debug

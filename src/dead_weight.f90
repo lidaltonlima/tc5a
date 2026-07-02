@@ -57,10 +57,7 @@ contains
         force =  intGQ(0d0, length, q, 4) * gravity_dir
 
         force_nor = dot_product(force, element_dir) * element_dir
-        force_per = force - (dot_product(force, element_dir) * element_dir)
-
-        print *, force_nor
-        print *, force_per
+        force_per = force - force_nor
     end subroutine get_dead_weight
 
     pure function q(x) result(y)
