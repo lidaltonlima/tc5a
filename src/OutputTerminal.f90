@@ -240,4 +240,117 @@ contains
         end do
         write(*, '(A)') '|'
     end subroutine print_titles
+
+    subroutine print_structure_data(nno, nel, ndofn, nmat, nsec, &
+        materials, sections, nodes, bars)
+        ! PURPOSE: Get da data structure from file structure.dat
+
+        ! I/O vars
+        integer, intent(in) :: nno  ! Number of nodes
+        integer, intent(in) :: nel  ! Number of elements
+        integer, intent(in) :: ndofn  ! Number of degrees of freedom per node
+        integer, intent(in) :: nmat  ! Number of materials
+        integer, intent(in) :: nsec  ! Number of sections
+
+        real(8), intent(in), allocatable :: materials(:, :)
+        real(8), intent(in), allocatable :: sections(:, :)
+        real(8), intent(in), allocatable :: nodes(:, :)
+        integer, intent(in), allocatable :: bars(:, :)
+
+
+        ! Control vars
+        integer :: i
+
+
+        ! =========================================================================================
+        ! Output
+        ! =========================================================================================
+100     format(1A5, ':', 1I20)
+        ! Title *******************************************************************************
+        do i = 1, 100
+            write(*, '(A)', advance='no') '='
+        end do
+
+        write(*, '(/, A)') 'Debug'
+
+        do i = 1, 100
+            write(*, '(A)', advance='no') '='
+        end do
+        write(*, *)
+
+        ! Controls ****************************************************************************
+        write(*, '(A9)', advance='no') 'CONTROLS '
+
+        do i = 1, 91
+            write(*, '(A1)', advance='no') '/'
+        end do
+        print *
+
+
+        write(*, 100) 'nno', nno
+        write(*, 100) 'nel', nel
+        write(*, 100) 'ndofn', ndofn
+        write(*, 100) 'nmat', nmat
+        write(*, 100) 'nsec', nsec
+        print *
+        print *
+
+        ! Materials ***************************************************************************
+        write(*, '(A9)', advance='no') 'MATERIALS '
+
+        do i = 1, 91
+            write(*, '(A1)', advance='no') '/'
+        end do
+        print *
+        call print_table(materials, &
+            100, &
+            precision=5, &
+            titles=[character(len=3) :: 'E', 'rho'], &
+            line_number=.true.)
+        print *
+        print *
+
+        ! SECTIONS ****************************************************************************
+        write(*, '(A9)', advance='no') 'SECTIONS '
+
+        do i = 1, 91
+            write(*, '(A1)', advance='no') '/'
+        end do
+        print *
+        call print_table(sections, &
+            100, &
+            precision=5, &
+            titles=[character(len=7) :: 'Area', 'Inertia'], &
+            line_number=.true.)
+        print *
+        print *
+
+        ! NODES *******************************************************************************
+        write(*, '(A9)', advance='no') 'NODES '
+
+        do i = 1, 91
+            write(*, '(A1)', advance='no') '/'
+        end do
+        print *
+        call print_table(nodes, &
+            100, &
+            precision=2, &
+            titles=[character(len=7) :: 'x', 'y'], &
+            line_number=.true.)
+        print *
+        print *
+
+        ! Bars ********************************************************************************
+        write(*, '(A9)', advance='no') 'BARS '
+
+        do i = 1, 91
+            write(*, '(A1)', advance='no') '/'
+        end do
+        print *
+        call print_table(bars, &
+            100, &
+            titles=[character(len=10) :: 'Material', 'Section', 'Start Node', 'End Node'], &
+            line_number=.true.)
+        print *
+    end subroutine print_structure_data
 end module OutputTerminal
