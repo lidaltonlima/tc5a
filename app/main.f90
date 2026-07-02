@@ -1,6 +1,7 @@
 program main
     use file_to_structure, only: get_structure_data
     use stiffness, only: get_kl
+    use dead_weight, only: get_dead_weight
     implicit none
 
     ! Structure data
@@ -21,6 +22,7 @@ program main
     ! Controls
     integer :: i, j  ! Indexes
     integer :: id   ! Index id
+    logical, parameter :: debug = .false.
 
     ! =============================================================================================
     ! Calc
@@ -31,16 +33,20 @@ program main
     call get_kl(kl, nel, ndofn, &
         materials, sections, nodes, bars)
 
+    call get_dead_weight(rho=7850d0, length=5d0, px=[0d0, 2.5d0, 5d0], areas=[0.05d0, 0.0825d0, 0.12d0])
+
     ! =============================================================================================
     ! Debug
     ! =============================================================================================
-    do id = 1, nel
-        write(*, *) 'Element ID: ', id
-        do i = 1, 2 * ndofn
-            do j = 1, 2 * ndofn
-                write(*, '(ES20.4)', advance='no') kl(id, i, j)
+    if ( debug ) then
+        do id = 1, nel
+            write(*, *) 'Element ID: ', id
+            do i = 1, 2 * ndofn
+                do j = 1, 2 * ndofn
+                    write(*, '(ES15.4)', advance='no') kl(id, i, j)
+                end do
+                print *
             end do
-            print *
         end do
-    end do
+    end if
 end program main
