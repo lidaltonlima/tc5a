@@ -12,8 +12,8 @@ program main
     integer :: nno  ! Number of nodes
     integer :: nel  ! Number of elements
     integer :: ndofn  ! Number of degrees of freedom per node
-    integer :: nmat  ! Number of materials
-    integer :: nsec  ! Number of sections
+    integer :: ntm  ! Number of materials
+    integer :: nts  ! Number of sections
 
     real(8), allocatable :: materials(:, :)
     real(8), allocatable :: sections(:, :)
@@ -31,13 +31,12 @@ program main
     ! =============================================================================================
     ! Calculation
     ! =============================================================================================
-    call get_structure_data(nno, nel, ndofn, nmat, nsec, &
-        materials, sections, nodes, bars)
+    call get_structure_data(nno, nel, ndofn, ntm, nts, materials, sections, nodes, bars)
 
     kl = get_kl(nel, ndofn, materials, sections, nodes, bars)
 
     call get_dead_weight(rho=7850d0, &
-        dx=5d0, dy=0d0, &
+        dx=5d0, dy=5d0, &
         px=[0d0, 2.5d0, 5d0], &
         areas=[0.05d0, 0.0825d0, 0.12d0])
 
@@ -45,7 +44,7 @@ program main
     ! Debug
     ! =============================================================================================
     if ( debug ) then
-        call print_structure_data(nno, nel, ndofn, nmat, nsec, &
+        call print_structure_data(nno, nel, ndofn, ntm, nts, &
             materials, sections, nodes, bars)
         do id = 1, nel
             write(*, *) 'Element ID: ', id

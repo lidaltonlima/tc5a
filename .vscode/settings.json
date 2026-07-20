@@ -31,6 +31,7 @@
   },
   "fortran.formatting.formatter": "findent",
   "fortran.formatting.findentArgs": [
+    "--label_left=0",
     "--indent=4",
     "--indent_select=8",
     "--indent_case=4",

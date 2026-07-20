@@ -5,7 +5,6 @@ nmat                2
 nsec                3
 ndofn               3
 
-
 MATERIALS
 id                  E                   rho
 1                   2009D0              7.850D4

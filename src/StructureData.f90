@@ -36,16 +36,16 @@ contains
         end if
     end subroutine open_data_file
 
-    subroutine get_structure_data(nno, nel, ndofn, nmat, nsec, &
+    subroutine get_structure_data(nno, nel, ndofn, ntm, nts, &
         materials, sections, nodes, bars, debug)
-        ! PURPOSE: Get da data structure from file structure.dat
+        ! PURPOSE: Get da data structure
 
         ! I/O vars
         integer, intent(out) :: nno  ! Number of nodes
         integer, intent(out) :: nel  ! Number of elements
         integer, intent(out) :: ndofn  ! Number of degrees of freedom per node
-        integer, intent(out) :: nmat  ! Number of materials
-        integer, intent(out) :: nsec  ! Number of sections
+        integer, intent(out) :: ntm  ! Number of materials
+        integer, intent(out) :: nts  ! Number of sections
 
         real(8), intent(out), allocatable :: materials(:, :)
         real(8), intent(out), allocatable :: sections(:, :)
@@ -99,9 +99,9 @@ contains
                     case ('ndofn')
                         ndofn = temp_int
                     case ('nmat')
-                        nmat = temp_int
+                        ntm = temp_int
                     case ('nsec')
-                        nsec = temp_int
+                        nts = temp_int
                 end select
             else if (read_stat == -1) then
                 exit CONTROLS
@@ -118,13 +118,13 @@ contains
         ! MATERIALS
         ! =========================================================================================
         ! Allocation ******************************************************************************
-        allocate(materials(nmat, 2))
+        allocate(materials(ntm, 2))
 
         ! Open ************************************************************************************
         call open_data_file('materials', file_unit)
 
         ! Read ************************************************************************************
-        do id = 1, nmat
+        do id = 1, ntm
             read(file_unit, *) materials(id, 1), materials(id, 2)
         end do
 
@@ -135,13 +135,13 @@ contains
         ! SECTIONS
         ! =========================================================================================
         ! Allocation ******************************************************************************
-        allocate(sections(nsec, 2))
+        allocate(sections(nts, 2))
 
         ! Open ************************************************************************************
         call open_data_file('sections', file_unit)
 
         ! Read ************************************************************************************
-        do id = 1, nsec
+        do id = 1, nts
             read(file_unit, *) sections(id, 1), sections(id, 2)
         end do
 
